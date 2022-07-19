@@ -1,0 +1,7 @@
+app:
+  image: 
+    name: andreiprisacaru891/simple-api
+    tag: v0.0.2-alpine
+  name: simple-api
+  port: 8080
+  replicas: 3

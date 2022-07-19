@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: api-gateway
+  namespace: istio-system
+spec:
+  selector:
+    app: istio-ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: api-route
+spec:
+  hosts:
+  - "*"
+  gateways:
+      - istio-system/api-gateway
+  http:
+  - name: "reviews-v2-routes"
+    route:
+    - destination:
+        host: simple-api-svc.default.svc.cluster.local
+        port:
+          number: 80
