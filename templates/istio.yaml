@@ -8,11 +8,15 @@ spec:
     app: istio-ingressgateway
   servers:
   - port:
-      number: 80
-      name: http
-      protocol: HTTP
+      number: 443
+      name: https
+      protocol: HTTPS
     hosts:
     - "*"
+    tls:
+      mode: SIMPLE
+      credentialName: simple-api-credential
+
 ---
 
 apiVersion: networking.istio.io/v1beta1
@@ -25,7 +29,7 @@ spec:
   gateways:
       - istio-system/api-gateway
   http:
-  - name: "reviews-v2-routes"
+  - name: "api-routes"
     route:
     - destination:
         host: simple-api-svc.default.svc.cluster.local

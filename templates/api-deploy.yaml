@@ -16,6 +16,17 @@ spec:
     spec:
       containers:
       - name: api
+        env:
+          - name: CHALLENGE_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: challenge-map
+                key: challenge_path
+          - name: CHALLENGE_VAL
+            valueFrom:
+              configMapKeyRef:
+                name: challenge-map
+                key: challenge_value
         image: {{ printf "%s:%s" .Values.app.image.name .Values.app.image.tag }}
         ports:
         - containerPort: 8080
