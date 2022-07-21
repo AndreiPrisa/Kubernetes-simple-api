@@ -1,7 +1,8 @@
 app:
   image: 
     name: andreiprisacaru891/simple-api
-    tag: v0.0.3-alpine
+    tag: v0.0.5-alpine
   name: simple-api
   port: 8080
   replicas: 3
+  mount: "/mnt/azure"

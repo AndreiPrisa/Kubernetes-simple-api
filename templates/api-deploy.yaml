@@ -20,15 +20,26 @@ spec:
           - name: CHALLENGE_PATH
             valueFrom:
               configMapKeyRef:
-                name: challenge-map
+                name: env-map
                 key: challenge_path
           - name: CHALLENGE_VAL
             valueFrom:
               configMapKeyRef:
-                name: challenge-map
+                name: env-map
                 key: challenge_value
+          - name: MNT_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: env-map
+                key: mnt_path
         image: {{ printf "%s:%s" .Values.app.image.name .Values.app.image.tag }}
+        volumeMounts:
+          - mountPath: {{ .Values.app.mount }}
+            name: volume
         ports:
         - containerPort: 8080
-
+      volumes:
+        - name: volume
+          persistentVolumeClaim:
+            claimName: simple-api-azurefile
 

@@ -1,7 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: challenge-map
+  name: env-map
 data:
   challenge_path: "/.well-known/acme-challenge/QZ1rnys-1N8C4gGqPulMMUp4sb-QFoay9DaQDWIP_As"
   challenge_value: "QZ1rnys-1N8C4gGqPulMMUp4sb-QFoay9DaQDWIP_As.SC67O2bsitHlSvu8mluordGJavY-zxrk5vrnLSb74XU"
+  mnt_path: {{ .Values.app.mount }}
